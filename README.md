@@ -57,3 +57,7 @@ Contact wolfez@mail.uc.edu for technical collaboration, research, or commercial 
 
 - Jaiswal, A., Chakraborty, I., Agrawal, A., & Roy, K. (2019). "8T SRAM Cell as a Multibit Dot-Product Engine for Beyond Von Neumann Computing." *IEEE Transactions on Very Large Scale Integration (VLSI) Systems*, 27(11), 2556-2567.
 - [TinyQV](https://tinytapeout.com/chips/ttihp25a/tt_um_MichaelBell_tinyQV) by Michael Bell
+
+
+TinyMOA™: Memory-Optimized Architecture for Edge ML
+© 2026 Ezra Wolf. All rights reserved.
