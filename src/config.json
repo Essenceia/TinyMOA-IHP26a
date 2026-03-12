@@ -69,7 +69,7 @@
           "dir::./TinyMOA/macro/SRAM_512x32/RM_IHPSG13_1P_512x32_c2_bm_bist_typ_1p20V_25C.lib"
         ]
       },
-      "nl": ["dir::./inyMOA/src/memory/sram.v"],
+      "nl": ["dir::./TinyMOA/src/memory/sram.v"],
       "spice": [
         "dir::./TinyMOA/macro/SRAM_512x32/RM_IHPSG13_1P_512x32_c2_bm_bist.cdl"
       ]
