@@ -41,7 +41,6 @@
 
 
   "//": "SRAM macro integration",
-  "SYNTH_HIERARCHY_MODE": "keep",
   "MACROS": {
     "RM_IHPSG13_1P_512x32_c2_bm_bist": {
       "instances": {
@@ -51,28 +50,21 @@
         }
       },
       "gds": [
-        "dir::./TinyMOA/macro/SRAM_512x32/RM_IHPSG13_1P_512x32_c2_bm_bist.gds"
+        "dir::TinyMOA/macro/SRAM_512x32/RM_IHPSG13_1P_512x32_c2_bm_bist.gds"
       ],
       "lef": [
-        "dir::./TinyMOA/macro/SRAM_512x32/RM_IHPSG13_1P_512x32_c2_bm_bist.lef"
+        "dir::TinyMOA/macro/SRAM_512x32/RM_IHPSG13_1P_512x32_c2_bm_bist.lef"
       ],
       "lib": {
-        "nom_*": [
-          "dir::./TinyMOA/macro/SRAM_512x32/RM_IHPSG13_1P_512x32_c2_bm_bist_typ_1p20V_25C.lib"
-        ],
-        "min_*": [
-          "dir::./TinyMOA/macro/SRAM_512x32/RM_IHPSG13_1P_512x32_c2_bm_bist_fast_1p32V_m55C.lib"
-        ],
-        "max_*": [
-          "dir::./TinyMOA/macro/SRAM_512x32/RM_IHPSG13_1P_512x32_c2_bm_bist_slow_1p08V_125C.lib"
-        ],
         "*": [
-          "dir::./TinyMOA/macro/SRAM_512x32/RM_IHPSG13_1P_512x32_c2_bm_bist_typ_1p20V_25C.lib"
+          "dir::TinyMOA/macro/SRAM_512x32/RM_IHPSG13_1P_512x32_c2_bm_bist_typ_1p20V_25C.lib"
         ]
       },
-      "nl": ["dir::./TinyMOA/src/memory/sram.v"],
+      "nl": [
+        "dir::TinyMOA/src/memory/sram.v"
+      ],
       "spice": [
-        "dir::./TinyMOA/macro/SRAM_512x32/RM_IHPSG13_1P_512x32_c2_bm_bist.cdl"
+        "dir::TinyMOA/macro/SRAM_512x32/RM_IHPSG13_1P_512x32_c2_bm_bist.cdl"
       ]
     }
   },
@@ -81,7 +73,6 @@
     "top.sram VPWR VGND VDD! VSS!",
     "top.sram VPWR VGND VDDARRAY! VSS!"
   ],
-
   "//": "Custom PDN config: SRAM power pins are on Metal4, need Metal4↔TopMetal1 connection",
   "PDN_CFG": "dir::pdn_cfg.tcl",
 
