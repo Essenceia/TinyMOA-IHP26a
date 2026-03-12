@@ -1,0 +1,24 @@
+
+# General
+.DS_Store
+*.bin
+# *.hex # We test program.hex files
+*.map
+*.o
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# FPGA
+top*.json
+*.blif
+*.asc
+sim_build/
