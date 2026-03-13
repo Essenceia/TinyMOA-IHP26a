@@ -24,6 +24,11 @@ COMPILE_ARGS    += -DSIM
 VERILOG_SOURCES += $(PDK_ROOT)/ihp-sg13g2/libs.ref/sg13g2_io/verilog/sg13g2_io.v
 VERILOG_SOURCES += $(PDK_ROOT)/ihp-sg13g2/libs.ref/sg13g2_stdcell/verilog/sg13g2_stdcell.v
 
+# Must add SRAM behavioral and BIST models to pass GL test.
+# https://github.com/splinedrive/kianv-sv32-tt-linux-soc/blob/2d2c5986258a3f8c6b535cf81e98780e07f681b5/test/Makefile#L100-L101
+GL_SOURCES += $(SRC_DIR)/RM_IHPSG13_1P_core_behavioral_bm_bist.v
+GL_SOURCES += $(SRC_DIR)/RM_IHPSG13_1P_512x32_c2_bm_bist.v
+
 # this gets copied in by the GDS action workflow
 VERILOG_SOURCES += $(PWD)/gate_level_netlist.v
 

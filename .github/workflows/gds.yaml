@@ -28,6 +28,12 @@ jobs:
       - name: Run Tiny Tapeout Precheck
         uses: TinyTapeout/tt-gds-action/precheck@ttihp26a
 
+        # Get pre-generated SRAM macros passing pre-check.
+        # https://github.com/splinedrive/kianv-sv32-tt-linux-soc/commit/271af3f7e35bd84eb1b9b4dbb96297bf98e6ee94
+        with:
+          tools-repo: urish/tt-support-tools
+          tools-ref: ihp-8x4
+
   gl_test:
     needs: gds
     runs-on: ubuntu-24.04
