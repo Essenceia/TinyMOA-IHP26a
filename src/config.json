@@ -70,8 +70,8 @@
   },
 
   "PDN_MACRO_CONNECTIONS": [
-    "top.sram VPWR VGND VDD! VSS!",
-    "top.sram VPWR VGND VDDARRAY! VSS!"
+    "top.sram VDPWR VGND VDD! VSS!",
+    "top.sram VDPWR VGND VDDARRAY! VSS!"
   ],
   "//": "Custom PDN config: SRAM power pins are on Metal4, need Metal4↔TopMetal1 connection",
   "PDN_CFG": "dir::pdn_cfg.tcl",
