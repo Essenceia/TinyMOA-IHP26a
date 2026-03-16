@@ -83,7 +83,7 @@
   "ERROR_ON_MAGIC_DRC": false,
 
   "//": "Blackbox SRAM macros during SPICE extraction for LVS, as the macros are not LVS clean",
-  "MAGIC_EXT_ABSTRACT_CELLS": ["RM_IHPSG13_.*"],
+  "MAGIC_EXT_ABSTRACT_CELLS": ["RM_IHPSG13_2P_.*"],
 
 
 
