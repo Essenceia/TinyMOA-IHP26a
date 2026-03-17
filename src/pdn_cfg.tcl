@@ -82,12 +82,13 @@ add_pdn_stripe \
 # OLD R90 / TOPMETAL2 config:
 # add_pdn_stripe -grid stdcell_grid -layer $::env(PDN_HORIZONTAL_LAYER) ...
 
-# Connect Vertical (TopMetal1) to Horizontal (Metal5)
+# Connect Horizontal (Metal5) to Vertical (TopMetal1)
+# FIX: OpenROAD requires bottom-layer then top-layer. Metal5 is BELOW TopMetal1.
 add_pdn_connect \
     -grid stdcell_grid \
-    -layers "$::env(PDN_VERTICAL_LAYER) Metal5"
+    -layers "Metal5 $::env(PDN_VERTICAL_LAYER)"
 
-# OLD R90 / TOPMETAL2 config:
+# OLD R90 / TOPMETAL2 config (TopMetal1 is below TopMetal2):
 # add_pdn_connect -grid stdcell_grid -layers "$::env(PDN_VERTICAL_LAYER) $::env(PDN_HORIZONTAL_LAYER)"
 
 # Standard cell rails on Metal1
