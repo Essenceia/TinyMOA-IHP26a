@@ -34,12 +34,7 @@
 
 
 
-
-
-
-
-
-
+  
   "//": "SRAM macro integration",
   "MACROS": {
     "RM_IHPSG13_2P_512x32_c2_bm_bist": {
