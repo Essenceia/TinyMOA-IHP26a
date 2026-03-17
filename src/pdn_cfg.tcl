@@ -1,18 +1,24 @@
 # Credit goes to Urish:
 # https://github.com/urish/ttihp-sram-test/blob/main/src/pdn_cfg.tcl
 # 
-# This file SHOULD work with all IHP SRAM macros, but was only tested with RM_IHPSG13_1P_1024x8_c2_bm_bist as of March 2026.
+# This file SHOULD work with all IHP SRAM macros, but was only tested with RM_IHPSG13_1P_1024x8_c2_bm_bist (*) as of March 2026.
 # https://www.tinytapeout.com/chips/ttihp0p2/tt_um_urish_sram_test
+# 
+# (*) UPDATE: RM_IHPSG13_1P_512x32_c2_bm_bist requires a hacky fix to move layer 235/4 to 189/4. *DO NOT* delete it.
+#     - https://github.com/IHP-GmbH/IHP-Open-PDK/issues/615
 #
 # Custom PDN configuration for SRAM macro integration
 #
 # The SRAM macro (RM_IHPSG13_1P_1024x8_c2_bm_bist) has power pins
 # (VDD!, VDDARRAY!, VSS!) on Metal4. The default macro PDN grid tries
-# to connect TopMetal1↔TopMetal2, which fails when FP_PDN_MULTILAYER=0
-# (no TopMetal2 stripes). This custom config connects Metal4↔TopMetal1
+# to connect TopMetal1<->TopMetal2, which fails when FP_PDN_MULTILAYER=0
+# (no TopMetal2 stripes). This custom config connects Metal4<->TopMetal1
 # for the macro grid instead.
 #
-# Based on librelane's default pdn_cfg.tcl.
+# Modifications based on LibreLane's default `pdn_cfg.tcl`:
+# 1. Removed TopMetal2 (PDN_HORIZONTAL_LAYER) to fix TinyTapeout forbidden layer Precheck.
+# 2. Replaced horizontal routing with Metal5.
+# 3. Adjusted macro connections for "N" (North) orientation instead of R90.
 
 source $::env(SCRIPTS_DIR)/openroad/common/set_global_connections.tcl
 set_global_connections
@@ -42,12 +48,16 @@ foreach vdd $::env(VDD_NETS) gnd $::env(GND_NETS) {
 set_voltage_domain -name CORE -power $::env(VDD_NET) -ground $::env(GND_NET) \
     -secondary_power $secondary
 
-# Stdcell grid: Multi-layer (TopMetal1 Vertical, TopMetal2 Horizontal)
+# STDCELL grid
+# Define pins: ONLY export TopMetal1 (Vertical) to prevent TT pre-check failures
 define_pdn_grid \
     -name stdcell_grid \
     -starts_with POWER \
     -voltage_domain CORE \
-    -pins "$::env(PDN_HORIZONTAL_LAYER) $::env(PDN_VERTICAL_LAYER)"
+    -pins "$::env(PDN_VERTICAL_LAYER)"
+
+# R90 / TOPMETAL2 config (Caused pre-check failures on R90 memory macros):
+#    -pins "$::env(PDN_HORIZONTAL_LAYER) $::env(PDN_VERTICAL_LAYER)"
 
 # Vertical stripes (TopMetal1)
 add_pdn_stripe \
@@ -59,19 +69,26 @@ add_pdn_stripe \
     -spacing $::env(PDN_VSPACING) \
     -starts_with POWER -extend_to_core_ring
 
-# Horizontal stripes (TopMetal2)
+# Horizontal stripes (Changed to Metal5 to avoid TopMetal2 forbidden layer)
 add_pdn_stripe \
     -grid stdcell_grid \
-    -layer $::env(PDN_HORIZONTAL_LAYER) \
+    -layer Metal5 \
     -width $::env(PDN_HWIDTH) \
     -pitch $::env(PDN_HPITCH) \
     -offset $::env(PDN_HOFFSET) \
     -spacing $::env(PDN_HSPACING) \
     -starts_with POWER -extend_to_core_ring
 
+# OLD R90 / TOPMETAL2 config:
+# add_pdn_stripe -grid stdcell_grid -layer $::env(PDN_HORIZONTAL_LAYER) ...
+
+# Connect Vertical (TopMetal1) to Horizontal (Metal5)
 add_pdn_connect \
     -grid stdcell_grid \
-    -layers "$::env(PDN_VERTICAL_LAYER) $::env(PDN_HORIZONTAL_LAYER)"
+    -layers "$::env(PDN_VERTICAL_LAYER) Metal5"
+
+# OLD R90 / TOPMETAL2 config:
+# add_pdn_connect -grid stdcell_grid -layers "$::env(PDN_VERTICAL_LAYER) $::env(PDN_HORIZONTAL_LAYER)"
 
 # Standard cell rails on Metal1
 if { $::env(PDN_ENABLE_RAILS) == 1 } {
@@ -86,7 +103,7 @@ if { $::env(PDN_ENABLE_RAILS) == 1 } {
         -layers "$::env(PDN_RAIL_LAYER) $::env(PDN_VERTICAL_LAYER)"
 }
 
-# SRAM macro grid: connect Metal4 (Vertical macro pins) to TopMetal2 (Horizontal stripes)
+# SRAM macro grid & connections
 define_pdn_grid \
     -macro \
     -default \
@@ -94,7 +111,23 @@ define_pdn_grid \
     -starts_with POWER \
     -halo "$::env(PDN_HORIZONTAL_HALO) $::env(PDN_VERTICAL_HALO)"
 
-# Connect Metal4 directly to the horizontal layer
+# N (North) Orientation (CANNOT FIT FOR SP_1024x8)
+# In N orientation, the SRAM's Metal4 pins are Vertical
+# We must connect them to our Horizontal stripes (Metal5)
+# https://www.tinytapeout.com/specs/memory/
 add_pdn_connect \
     -grid macro \
-    -layers "Metal4 $::env(PDN_HORIZONTAL_LAYER)"
+    -layers "Metal4 Metal5"
+
+# R90 Orientation (CANNOT FIT FOR BOTH SP_512x32 AND DP_512x32)
+# In R90 orientation, the SRAM's Metal4 pins are Rotated to Horizontal
+# We must connect them to our Vertical stripes (TopMetal1)
+# https://www.tinytapeout.com/specs/memory/
+# add_pdn_connect \
+#     -grid macro \
+#     -layers "Metal4 $::env(PDN_VERTICAL_LAYER)"
+
+# --- OLD ORIGINAL CONFIG (COMMENTED OUT) ---
+# add_pdn_connect \
+#     -grid macro \
+#     -layers "Metal4 $::env(PDN_HORIZONTAL_LAYER)"
