@@ -33,36 +33,32 @@ project:
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
+  ui[0]: "u_in0"
+  ui[1]: "u_in1"
+  ui[2]: "u_in2"
+  ui[3]: "u_in3"
+  ui[4]: "u_in4"
+  ui[5]: "u_in5"
+  ui[6]: "u_in6"
+  ui[7]: "u_in7"
 
-  # Inputs
-  ui[0]: "enable"
-  ui[1]: "up_down"
-  ui[2]: "clk"
-  ui[3]: ""
-  ui[4]: ""
-  ui[5]: ""
-  ui[6]: ""
-  ui[7]: ""
+  uo[0]: "u_out0"
+  uo[1]: "u_out1"
+  uo[2]: "u_out2"
+  uo[3]: "u_out3"
+  uo[4]: "u_out4"
+  uo[5]: "u_out5"
+  uo[6]: "u_out6"
+  uo[7]: "u_out7"
 
-  # Outputs
-  uo[0]: "dbg_pc[0]"
-  uo[1]: "dbg_pc[1]"
-  uo[2]: "dbg_pc[2]"
-  uo[3]: "dbg_pc[3]"
-  uo[4]: "dbg_pc[4]"
-  uo[5]: "dbg_state[0]"
-  uo[6]: "dbg_state[1]"
-  uo[7]: "dbg_state[2]"
-
-  # Bidirectional pins
-  uio[0]: ""
-  uio[1]: ""
-  uio[2]: ""
-  uio[3]: ""
-  uio[4]: ""
-  uio[5]: ""
-  uio[6]: ""
-  uio[7]: ""
+  uio[0]: "u_inout0"
+  uio[1]: "u_inout1"
+  uio[2]: "u_inout2"
+  uio[3]: "u_inout3"
+  uio[4]: "u_inout4"
+  uio[5]: "u_inout5"
+  uio[6]: "u_inout6"
+  uio[7]: "u_inout7"
 
 # DO NOT CHANGE
 yaml_version: 6
