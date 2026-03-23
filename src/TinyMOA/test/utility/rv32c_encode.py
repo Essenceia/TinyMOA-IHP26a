@@ -504,3 +504,50 @@ def encode_c_mul(rd, rs2):
     Lower 3 bits used as prime register index (maps to x8-x15).
     """
     return encode_ca_type(0b100111, rd & 0x7, 0b10, rs2 & 0x7, 0b01)
+
+
+def encode_c_not(rd):
+    """
+    Compressed Bitwise NOT (Zcb CA-Type, Q1 funct6=100111 funct2=00)
+    C.NOT rd'   rd' = rd' XOR -1  (xori rd', rd', -1)
+
+    Shares funct6 with C.MUL, differentiated by funct2=00 vs 10.
+    rs2' field unused (single-register operation).
+    """
+    return encode_ca_type(0b100111, rd & 0x7, 0b00, 0, 0b01)
+
+
+def encode_c_zext_b(rd):
+    """
+    Zero extend byte (Zcb CA-Type, Q1 funct6=100000 funct2=00)
+    Requires Zbb extension - not implemented.
+    C.ZEXT.B rd'   rd' = EXTZ(rd'[7:0])
+    """
+    return encode_ca_type(0b100000, rd & 0x7, 0b00, 0, 0b01)
+
+
+def encode_c_sext_b(rd):
+    """
+    Sign extend byte (Zcb CA-Type, Q1 funct6=100001 funct2=00)
+    Requires Zbb extension - not implemented.
+    C.SEXT.B rd'   rd' = EXTS(rd'[7:0])
+    """
+    return encode_ca_type(0b100001, rd & 0x7, 0b00, 0, 0b01)
+
+
+def encode_c_zext_h(rd):
+    """
+    Zero extend halfword (Zcb CA-Type, Q1 funct6=100010 funct2=00)
+    Requires Zbb extension - not implemented.
+    C.ZEXT.H rd'   rd' = EXTZ(rd'[15:0])
+    """
+    return encode_ca_type(0b100010, rd & 0x7, 0b00, 0, 0b01)
+
+
+def encode_c_sext_h(rd):
+    """
+    Sign extend halfword (Zcb CA-Type, Q1 funct6=100011 funct2=00)
+    Requires Zbb extension - not implemented.
+    C.SEXT.H rd'   rd' = EXTS(rd'[15:0])
+    """
+    return encode_ca_type(0b100011, rd & 0x7, 0b00, 0, 0b01)
