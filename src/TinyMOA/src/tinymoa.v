@@ -19,7 +19,7 @@ module tinymoa_top (
     input  wire        ena,
     input  wire [7:0]  ui_in,
     output wire [7:0]  uo_out,
-    inout  wire [7:0]  uio_in,
+    input  wire [7:0]  uio_in,
     output wire [7:0]  uio_out,
     output wire [7:0]  uio_oe
 );
