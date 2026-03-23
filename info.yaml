@@ -20,13 +20,12 @@ project:
   source_files:
     - "project.v"
     - "TinyMOA/src/tinymoa.v"
-    - "TinyMOA/src/core.v"
-    - "TinyMOA/src/decoder.v"
-    - "TinyMOA/src/registers.v"
-    - "TinyMOA/src/counter.v"
-    - "TinyMOA/src/alu/alu.v"
-    - "TinyMOA/src/alu/shifter.v"
-    - "TinyMOA/src/alu/multiplier.v"
+    # - "TinyMOA/src/cpu.v"
+    # - "TinyMOA/src/decoder.v"
+    # - "TinyMOA/src/registers.v"
+    # - "TinyMOA/src/counter.v"
+    # -  "TinyMOA/src/alu.v"
+    # - "TinyMOA/src/tcm.v" # !!!EXCLUDED since it is in src/config.json!!!
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
