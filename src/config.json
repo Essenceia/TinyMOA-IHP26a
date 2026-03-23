@@ -36,9 +36,9 @@
   "//": "IHP SRAM macro integration",
   "//": "TinyMOA refers to it as TCM, however.",
   "MACROS": {
-    "tinymoa_tcm": {
+    "RM_IHPSG13_2P_512x32_c2_bm_bist": {
       "instances": {
-        "top.tcm": {
+        "top.tcm.sram": {
           "location": [325.25, 45.88],
           "orientation": "N"
         }
@@ -64,14 +64,11 @@
   },
 
   "PDN_MACRO_CONNECTIONS": [
-    "top.sram VPWR VGND VDD! VSS!",
-    "top.sram VPWR VGND VDDARRAY! VSS!"
+    "top.tcm.sram VPWR VGND VDD! VSS!",
+    "top.tcm.sram VPWR VGND VDDARRAY! VSS!"
   ],
   "//": "Custom PDN config: SRAM power pins are on Metal4, need Metal4<->TopMetal1 connection",
   "PDN_CFG": "dir::pdn_cfg.tcl",
-
-  "//": "SRAM GDS has no PR boundary layer; read full GDS instead of blackbox",
-  "MAGIC_MACRO_STD_CELL_SOURCE": "PDK",
 
   "//": "SRAM macro internals trigger massive DRC in Magic; skip (KLayout DRC also skipped)",
   "ERROR_ON_MAGIC_DRC": false,
