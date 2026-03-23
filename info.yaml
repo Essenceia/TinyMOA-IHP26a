@@ -20,7 +20,7 @@ project:
     - "project.v"
     - "TinyMOA/src/tinymoa.v"
     - "TinyMOA/src/cpu.v"
-    # - "TinyMOA/src/counter.v"
+    - "TinyMOA/src/counter.v"
     - "TinyMOA/src/decoder.v"
     - "TinyMOA/src/registers.v"
     - "TinyMOA/src/alu.v"
