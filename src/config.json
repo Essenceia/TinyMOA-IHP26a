@@ -38,7 +38,7 @@
   "MACROS": {
     "tinymoa_tcm": {
       "instances": {
-        "top.sram": {
+        "top.tcm": {
           "location": [325.25, 45.88],
           "orientation": "N"
         }
