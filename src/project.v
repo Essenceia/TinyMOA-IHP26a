@@ -8,7 +8,7 @@
 
 module tt_um_tinymoa_ihp26a (
     input  wire       clk,
-    input  wire       nrst,
+    input  wire       rst_n,
     input  wire       ena, // always high, can ignore.
 
     input  wire [7:0] ui_in,
@@ -20,7 +20,7 @@ module tt_um_tinymoa_ihp26a (
 );
     tinymoa_top top (
         .clk    (clk),
-        .nrst   (nrst),
+        .nrst   (rst_n),
         .ena    (ena),
         .ui_in  (ui_in),
         .uo_out (uo_out),
