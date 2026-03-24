@@ -39,7 +39,7 @@ module tinymoa_top (
     wire [3:0] par_data_in = uio_in[7:4];
 
     // === CPU clock gate ===
-    wire cpu_clk = clk & ~dbg_en;
+    wire cpu_clk = clk; // & ~dbg_en;
 
     // === PAR nibble + address state machine ===
     //
