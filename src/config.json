@@ -13,7 +13,7 @@
 
   "//": "PL_TARGET_DENSITY_PCT - You can increase this if Global Placement fails with error GPL-0302.",
   "//": "Users have reported that values up to 80 worked well for them.",
-  "PL_TARGET_DENSITY_PCT": 60,
+  "PL_TARGET_DENSITY_PCT": 70,
 
   "//": "CLOCK_PERIOD - Increase this in case you are getting setup time violations.",
   "//": "The value is in nanoseconds, so 20ns == 50MHz.",
@@ -31,6 +31,11 @@
   "//": "https://tinytapeout.com/faq/#how-can-i-map-an-additional-external-clock-to-one-of-the-gpios",
   "CLOCK_PORT": "clk",
 
+  "SYNTH_AUTONAME":"True",
+
+  "RUN_POST_GRT_DESIGN_REPAIR": "True",
+  "RUN_POST_GPL_DESIGN_REPAIR": "True",
+  "RUN_POST_CTS_RESIZER_TIMING": "True",
 
   "//": "==================================================",
   "//": "IHP SRAM macro integration",
@@ -39,7 +44,7 @@
     "RM_IHPSG13_2P_512x32_c2_bm_bist": {
       "instances": {
         "top.tcm.sram": {
-          "location": [325.25, 45.88],
+          "location": [900.0, 80.00],
           "orientation": "N"
         }
       },
